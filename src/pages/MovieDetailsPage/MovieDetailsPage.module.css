@@ -1,0 +1,85 @@
+.wrapper {
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: whitesmoke;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: repeat(5, max-content);
+  gap: 0 15px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.poster {
+  grid-column: 1/2;
+  grid-row: 2/5;
+
+  border: 5px solid white;
+}
+
+.title {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.score {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  align-self: center;
+}
+
+.subTitle {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+
+.overview {
+  grid-column: 2/3;
+  grid-row: 3/4;
+  align-self: center;
+
+  width: 50%;
+}
+
+.genres {
+  grid-column: 2/3;
+  grid-row: 4/5;
+}
+
+.genresParWrapper {
+  grid-column: 2/3;
+  grid-row: 4/5;
+  align-self: center;
+
+  display: flex;
+  gap: 15px;
+}
+
+.ul {
+  grid-column: 1/2;
+  grid-row: 5/6;
+  align-self: center;
+  justify-self: center;
+
+  display: flex;
+  gap: 15px;
+  padding: 15px 0;
+}
+
+.outlet {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.5)
+  );
+  color: whitesmoke;
+  padding-top: 15px;
+}

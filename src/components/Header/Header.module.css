@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 10px #000000;
+}
+
+.link {
+  color: black;
+  font-weight: 400;
+  padding: 15px 0;
+}
+
+.active {
+  color: red;
+  font-weight: bold;
+  padding: 15px 0;
+}
