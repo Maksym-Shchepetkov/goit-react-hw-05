@@ -35,10 +35,8 @@ const App = () => {
   });
 
   const [query, setQuery] = useState('');
-  console.log(query);
 
   const [searchMovie, setSearchMovie] = useState([]);
-  console.log(searchMovie);
 
   useEffect(() => {
     const handleFetchDetails = async () => {
@@ -74,7 +72,6 @@ const App = () => {
       const handleFetchSearch = async () => {
         try {
           const searchResults = await handleGetSearchData(query);
-          console.log(searchResults);
 
           setSearchMovie(searchResults.results);
         } catch (error) {
@@ -85,7 +82,6 @@ const App = () => {
         }
       };
       handleFetchSearch();
-      console.log('after handleFetch');
     }
   }, [query]);
 
@@ -115,7 +111,7 @@ const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home getInfo={setInfo} setUrlId={info} />} />
+        <Route path="/" element={<Home getInfo={setInfo} />} />
         <Route
           path="/movies"
           element={
@@ -123,7 +119,6 @@ const App = () => {
               submit={handleOnSubmit}
               movies={searchMovie}
               getId={setInfo}
-              setUrlId={info}
             />
           }
         />

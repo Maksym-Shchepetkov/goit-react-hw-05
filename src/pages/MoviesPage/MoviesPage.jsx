@@ -4,7 +4,7 @@ import MovieList from '../../components/MovieList/MovieList';
 import MovieItems from '../../components/MovieItems/MovieItems';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-const MoviesPage = ({ submit, movies, getId, setUrlId }) => {
+const MoviesPage = ({ submit, movies, getId }) => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -15,14 +15,11 @@ const MoviesPage = ({ submit, movies, getId, setUrlId }) => {
   }
 
   const handleSubmit = (values, actions) => {
-    console.log('handleSubmit виконується', values);
     const trimmedValue = values.search.trim();
     searchParams.set('query', trimmedValue);
     setSearchParams(searchParams);
     submit(trimmedValue);
-    console.log('Перед actions.resetForm');
     actions.resetForm();
-    console.log('Після actions.resetForm');
   };
 
   return (
@@ -43,7 +40,7 @@ const MoviesPage = ({ submit, movies, getId, setUrlId }) => {
       <MovieList>
         {movies.map(movie => (
           <li key={movie.id} onClick={() => getId(movie.id)}>
-            <MovieItems location={location} setUrlId={setUrlId}>
+            <MovieItems location={location} urlTitle={movie.title}>
               {movie.title}
             </MovieItems>
           </li>
