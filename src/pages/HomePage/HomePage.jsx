@@ -5,7 +5,7 @@ import s from './HomePage.module.css';
 import MovieItems from '../../components/MovieItems/MovieItems';
 import { useLocation } from 'react-router-dom';
 
-const HomePage = ({ getInfo, setUrlTitle }) => {
+const HomePage = ({ getInfo, setUrlId }) => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
 
@@ -31,7 +31,7 @@ const HomePage = ({ getInfo, setUrlTitle }) => {
         {movies.map(movie => {
           return (
             <li key={movie.id} onClick={() => getInfo(movie.id)}>
-              <MovieItems location={location} setUrlTitle={setUrlTitle}>
+              <MovieItems location={location} setUrlId={setUrlId}>
                 {movie.title}
               </MovieItems>
             </li>
