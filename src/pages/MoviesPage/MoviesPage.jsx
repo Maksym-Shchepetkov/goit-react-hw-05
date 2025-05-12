@@ -1,24 +1,43 @@
 import { Field, Form, Formik } from 'formik';
 import s from './MoviesPage.module.css';
 import MovieList from '../../components/MovieList/MovieList';
-import MovieItems from '../../components/MovieItems/MovieItems';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { handleGetSearchData } from '../../services/api';
+import { useSearchParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
 
-const MoviesPage = ({ submit, movies, getId }) => {
-  const location = useLocation();
+const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const queryValue = searchParams.get('query') || '';
+  const [searchMovie, setSearchMovie] = useState([]);
 
-  const query = searchParams.get('query') || '';
+  useEffect(() => {
+    if (queryValue !== '') {
+      const handleFetchSearch = async () => {
+        try {
+          const searchResults = await handleGetSearchData(queryValue);
 
-  if (query && movies.length === 0) {
-    submit(query);
-  }
+          setSearchMovie(searchResults.results);
+        } catch (error) {
+          toast.error('Hello World', {
+            duration: 4000,
+            position: 'top-center',
+          });
+        }
+      };
+      handleFetchSearch();
+    }
+  }, [queryValue]);
 
   const handleSubmit = (values, actions) => {
     const trimmedValue = values.search.trim();
-    searchParams.set('query', trimmedValue);
-    setSearchParams(searchParams);
-    submit(trimmedValue);
+
+    if (trimmedValue === '') {
+      toast.error('Please enter a search term');
+      return;
+    }
+
+    setSearchParams({ query: trimmedValue });
     actions.resetForm();
   };
 
@@ -37,15 +56,7 @@ const MoviesPage = ({ submit, movies, getId }) => {
         )}
       </Formik>
 
-      <MovieList>
-        {movies.map(movie => (
-          <li key={movie.id} onClick={() => getId(movie.id)}>
-            <MovieItems location={location} urlTitle={movie.title}>
-              {movie.title}
-            </MovieItems>
-          </li>
-        ))}
-      </MovieList>
+      <MovieList movies={searchMovie} />
     </div>
   );
 };

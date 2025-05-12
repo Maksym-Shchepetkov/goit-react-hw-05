@@ -1,11 +1,32 @@
 import MovieList from '../MovieList/MovieList';
 import user from '../../assets/user.svg';
 import s from './MovieCast.module.css';
+import { handleGetActors } from '../../services/api';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const MovieCast = ({ actors }) => {
+const MovieCast = () => {
+  const [cast, setCast] = useState([]);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    const handleFetchDetails = async () => {
+      try {
+        const team = await handleGetActors(movieId);
+        setCast(team.cast);
+      } catch (error) {
+        toast.error('Hello World', {
+          duration: 4000,
+          position: 'top-center',
+        });
+      }
+    };
+    handleFetchDetails();
+  }, [movieId]);
+
   return (
-    <MovieList>
-      {actors.map(char => {
+    <ul className={s.ul}>
+      {cast?.map(char => {
         return (
           <li key={char.cast_id}>
             {
@@ -25,7 +46,7 @@ const MovieCast = ({ actors }) => {
           </li>
         );
       })}
-    </MovieList>
+    </ul>
   );
 };
 

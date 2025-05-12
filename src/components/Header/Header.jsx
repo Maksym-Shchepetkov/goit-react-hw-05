@@ -6,20 +6,7 @@ const Header = () => {
   return (
     <header>
       <div className={s.container}>
-        <Navigation>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? s.active : s.link)}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/movies"
-            className={({ isActive }) => (isActive ? s.active : s.link)}
-          >
-            Movies
-          </NavLink>
-        </Navigation>
+        <Navigation />
       </div>
     </header>
   );

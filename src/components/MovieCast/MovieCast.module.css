@@ -1,3 +1,10 @@
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
 .rolePar {
   width: 200px;
 }
